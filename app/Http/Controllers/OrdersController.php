@@ -63,11 +63,17 @@ class OrdersController extends Controller
                 'last_name' => $request->input('lastName'),
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password'))
-            ]);
+            ]);            
+        }
+
+        if (isset($user->id) && !empty($user->id)) {
+            $userID = $user->id;
+        } elseif($request->input('userID')) {
+            $userID = $request->input('userID');
         }
 
         $order_data = [
-            'user_id' => $user->id ? $user->id : 0,
+            'user_id' => $userID ? $userID : 0,
             'products' => $request->input('cartItems'),
             'user_data' => $request->input('firstName') . ' ' . $request->input('lastName'),
             'email' => $request->input('email'),
