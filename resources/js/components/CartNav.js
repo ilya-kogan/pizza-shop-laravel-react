@@ -43,9 +43,10 @@ class CartNav extends React.Component {
     if ( cartItems && cartItems.length > 0 ) {
       cartItem = cartItems.map( (item) => {
         return (
-          <MenuItem key={item.id} style={{ borderBottom: '1px dotted #908e8e' }}>
+          <MenuItem key={item.id} style={{ maxWidth: 350, borderBottom: '1px dotted #908e8e' }}>
             <CartItem
               data={item}
+              addToCart={this.props.addToCart}
               removeCartItem={this.props.removeCartItem}
               currency={this.props.currency}
             />
@@ -94,9 +95,9 @@ class CartNav extends React.Component {
             </MenuItem>
 
             <hr />
-            <MenuItem onClick={this.handleCloseCart}>
+            <MenuItem onClick={this.handleCloseCart} component={Link} to="/cart">
               <Typography noWrap style={{ fontSize: 16, fontWeight: 'bold' }}>
-                <Link to="/cart">Make an order</Link>
+                Make an order
               </Typography>
             </MenuItem>
           </Menu>

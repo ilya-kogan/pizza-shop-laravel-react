@@ -1,6 +1,7 @@
 import React from 'react';
-import CartItem from './CartItem';
-import { Container, Button, Paper, ButtonGroup } from '@material-ui/core';
+import CartPageItem from './CartPageItem';
+import OrderPrices from './OrderPrices';
+import { Container, Button, Typography, Paper, ButtonGroup } from '@material-ui/core';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { Link } from 'react-router-dom';
@@ -19,9 +20,9 @@ class CartPage extends React.Component {
       cartItem = cartItems.map( (item) => {
         return(
           <div key={item.id}>
-            <CartItem
+            <CartPageItem
               data={item}
-              cartPage={true}
+              addToCart={this.props.addToCart}
               removeCartItem={this.props.removeCartItem}
               currency={this.props.currency}
             />
@@ -40,14 +41,11 @@ class CartPage extends React.Component {
             <>
               { cartItem }
 
-              <hr/><hr/>
-
-              <div>
-                <strong>Subtotal: </strong>{ curr_symbol }{ totalPrice } ({ totalAmount }pc.)<br/>
-                <strong>Delivery: </strong>{ curr_symbol }5<br/>
-                <hr/>
-                <strong>Total: </strong>{ curr_symbol }{ totalPrice + 5 }
-              </div>
+              <OrderPrices
+                curr_symbol={curr_symbol}
+                totalPrice={totalPrice}
+                totalAmount={totalAmount}
+              />
             </>
           }
 
