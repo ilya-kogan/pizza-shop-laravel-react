@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Order;
 use Auth;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class OrdersController extends Controller
 {
@@ -36,7 +38,8 @@ class OrdersController extends Controller
  
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $user = [];
+        $validated_array = [
             'cartItems' => 'required',
             'firstName' => 'required',
             'lastName' => 'required',
@@ -45,10 +48,26 @@ class OrdersController extends Controller
             'address' => 'required',
             'currency' => 'required',
             'totalPrice' => 'required'
-        ]);
+        ];
+
+        if ($request->createAccount) {
+            $validated_array['email'] = 'required|email|unique:users';
+            $validated_array['password'] = 'required';
+            $validated_array['password_confirm'] = 'required|same:password';
+        }
+        $validated = $request->validate($validated_array);
+
+        if ($request->createAccount) {
+            $user = User::create([
+                'first_name' => $request->input('firstName'),
+                'last_name' => $request->input('lastName'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password'))
+            ]);
+        }
 
         $order_data = [
-            'user_id' => $request->input('userID') ? $request->input('userID') : 0,
+            'user_id' => $user->id ? $user->id : 0,
             'products' => $request->input('cartItems'),
             'user_data' => $request->input('firstName') . ' ' . $request->input('lastName'),
             'email' => $request->input('email'),
@@ -56,14 +75,14 @@ class OrdersController extends Controller
             'address' => $request->input('address'),
             'order_comments' => $request->input('orderComments') ? $request->input('orderComments') : '',
             'currency' =>  $request->input('currency'),
-            'price' =>  $request->input('totalPrice')
+            'price' =>  $request->input('totalPrice') + 5
         ];
-
         $order = Order::create($order_data);
  
         return response([
             'formSend' => 'success',
-            'order' => $order
+            'order' => $order,
+            'user' => $user
         ]);
     }
  

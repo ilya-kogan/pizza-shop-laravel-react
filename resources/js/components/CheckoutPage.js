@@ -1,4 +1,5 @@
 import React from 'react';
+import OrderPrices from './OrderPrices';
 import { Container, Grid, TextField, Button, Paper, ButtonGroup, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
@@ -25,6 +26,8 @@ class CheckoutPage extends React.Component {
       orderComments: '',
       errors: [],
       createAccount: false,
+      password: '',
+      password_confirm: '',
       showDialog: false,
       currency: {}
     }
@@ -65,7 +68,7 @@ class CheckoutPage extends React.Component {
 
   handleChange(e) {
     const target = e.target;
-    const value = target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
     this.setState({
@@ -96,6 +99,8 @@ class CheckoutPage extends React.Component {
               floor: '',
               orderComments: '',
               errors: [],
+              password: '',
+              password_confirm: '',
               responseStatus: ''
             });
 
@@ -114,6 +119,9 @@ class CheckoutPage extends React.Component {
   }
 
   render() {
+    const { totalAmount, totalPrice } = this.props.cartData;
+    const { curr_symbol } = this.props.currency;
+
     return(
       <Container style={{ marginTop: 30 }}>
         <h1>Checkout</h1>
@@ -233,12 +241,57 @@ class CheckoutPage extends React.Component {
                   </Grid>
                 </Grid>
 
-                {/* { this.state.userID === 0 &&
-                  <FormControlLabel
-                    control={<Checkbox checked={this.state.createAccount} onChange={(e) => this.handleChange(e)} name="createAccount" />}
-                    label="Create an account"
-                  />
-                } */}
+                { this.state.userID === 0 &&
+                  <>
+                    <FormControlLabel
+                      control={<Checkbox checked={this.state.createAccount} onChange={(e) => this.handleChange(e)} name="createAccount" />}
+                      label="Create an account"
+                    />
+
+                    { this.state.createAccount && 
+                      <Grid container spacing={3}>
+                        <Grid item xs={4}>
+                          <TextField
+                            error={this.state.errors.password ? true : false}
+                            label="Password"
+                            name="password"
+                            type="password"
+                            autoComplete="current-password"
+                            style={{ width: '100%' }}
+                            placeholder="Passsword"
+                            value={this.state.password}
+                            helperText={this.state.errors.password ? this.state.errors.password : ' '}
+                            variant="outlined"
+                            onChange={(e) => this.handleChange(e)}
+                          />
+                        </Grid>
+
+                        <Grid item xs={4}>
+                          <TextField
+                            error={this.state.errors.password_confirm ? true : false}
+                            label="Password Confirm"
+                            name="password_confirm"
+                            type="password"
+                            autoComplete="current-password"
+                            style={{ width: '100%' }}
+                            placeholder="Password Confirm"
+                            value={this.state.password_confirm}
+                            helperText={this.state.errors.password_confirm ? this.state.errors.password_confirm : ' '}
+                            variant="outlined"
+                            onChange={(e) => this.handleChange(e)}
+                          />
+                        </Grid>
+                      </Grid>
+                    }
+                  </>
+                }
+
+                <hr />
+                <OrderPrices
+                  curr_symbol={curr_symbol}
+                  totalPrice={totalPrice}
+                  totalAmount={totalAmount}
+                />
 
                 { this.state.responseStatus &&
                   <Alert severity={ this.state.responseStatus == 'success' ? 'success' : 'error' } style={{ marginTop: 20 }}>
