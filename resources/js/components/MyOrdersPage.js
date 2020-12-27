@@ -43,7 +43,21 @@ class MyOrdersPage extends React.Component {
         <h1>My Orders</h1>
 
         <Paper elevation={3} style={{ marginBottom: 15, padding: 30 }}>
-          { orderItems }
+          { (this.props.user && orderItems) &&
+            { orderItems }
+          }
+
+          { !this.props.user &&
+            <>
+              Please login to see orders.
+            </>
+          }
+
+          { (this.props.user && !orderItems) &&
+            <>
+              Sorry, you don't have any orders yet.
+            </>
+          }
         </Paper>
       </Container>
     );

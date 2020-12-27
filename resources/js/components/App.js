@@ -188,7 +188,7 @@ class App extends React.Component {
             <RegistrationPage />
           </Route>
           <Route path="/my-orders">
-            <MyOrdersPage />
+            <MyOrdersPage user={this.state.user} />
           </Route>
           <Route path="/checkout">
             <CheckoutPage
