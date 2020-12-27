@@ -12,4 +12,4 @@ This is a small online pizza shop.
 - Сurrency switch
 
 ## License
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
