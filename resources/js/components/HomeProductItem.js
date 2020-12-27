@@ -19,7 +19,7 @@ class HomeProductItem extends React.Component {
     const { curr_name, curr_symbol } = this.props.currency;
 
     return(
-      <Grid item xs={3}>
+      <Grid item xs={12} sm={3}>
         <Card>
           <CardActionArea>
             <CardMedia

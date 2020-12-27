@@ -1,6 +1,6 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
+import { Container, Grid, Snackbar } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import HomeProductItem from './HomeProductItem';
 
 class HomePage extends React.Component {
@@ -40,6 +40,16 @@ class HomePage extends React.Component {
           <Grid container spacing={5}>
             { productItem }
           </Grid>
+
+          <Snackbar
+            open={this.props.showAlertStatus}
+            autoHideDuration={3000}
+            onClose={() => this.props.showAlert(false)}
+          >
+            <Alert severity="success" onClose={() => this.props.showAlert(false)}>
+              Product added to cart!
+            </Alert>
+          </Snackbar>
         </Container>
       </>
     );
