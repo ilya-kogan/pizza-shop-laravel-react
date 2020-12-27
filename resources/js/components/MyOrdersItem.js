@@ -26,7 +26,7 @@ class MyOrdersItem extends React.Component {
                 <TableCell align="right">Address</TableCell>
                 <TableCell align="right">Phone</TableCell>
                 <TableCell align="right">Order Comments</TableCell>
-                <TableCell align="right">Price, {currencySymbol}</TableCell>
+                <TableCell align="right">Total Price, {currencySymbol}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -36,7 +36,7 @@ class MyOrdersItem extends React.Component {
                 <TableCell align="right">{data.address}</TableCell>
                 <TableCell align="right">{data.phone}</TableCell>
                 <TableCell align="right">{data.order_comments}</TableCell>
-                <TableCell align="right">{data.price}</TableCell>
+                <TableCell align="right"><b style={{ fontSize: 15 }}>{currencySymbol}{data.price}</b></TableCell>
               </TableRow>
 
               <TableRow>
@@ -48,7 +48,7 @@ class MyOrdersItem extends React.Component {
                 <TableCell align="right"></TableCell>
               </TableRow>
 
-              <TableRow>
+              <TableRow style={{ borderTop: '2px solid #000' }}>
                 <TableCell component="th" scope="row"><b>Order Items:</b></TableCell>
                 <TableCell align="right"></TableCell>
                 <TableCell align="right"></TableCell>
@@ -60,15 +60,27 @@ class MyOrdersItem extends React.Component {
               {products.map((product) => (
                 <TableRow key={product.id}>
                   <TableCell component="th" scope="row">
+                    <img style={{ width: 50, marginRight: 10 }} src={ 'img/' + product.id + '.png' } alt={ product.info.title } />
                     {product.info.title}
                   </TableCell>
                   <TableCell align="right"></TableCell>
                   <TableCell align="right"></TableCell>
                   <TableCell align="right">{product.amount}</TableCell>
                   <TableCell align="right">{data.currency == 'usd' ? product.info.price : product.info.price_eur}</TableCell>
-                  <TableCell align="right">{product.amount*product.info.price}</TableCell>
+                  <TableCell align="right">{data.currency == 'usd' ? product.amount*product.info.price : product.amount*product.info.price_eur}</TableCell>
                 </TableRow>
-              ))}
+              ))}              
+
+              <TableRow style={{ borderTop: '2px solid #000' }}>
+                <TableCell component="th" scope="row">
+                  <b>Delivery</b>
+                </TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right">1</TableCell>
+                <TableCell align="right">5</TableCell>
+                <TableCell align="right">5</TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
