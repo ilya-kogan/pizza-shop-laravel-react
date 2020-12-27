@@ -16,6 +16,7 @@ class App extends React.Component {
       cartItems: [],
       totalAmount: 0,
       totalPrice: 0,
+      showAlertStatus: false,
       currency: {
         curr_name: 'usd',
         curr_symbol: '$'
@@ -80,14 +81,25 @@ class App extends React.Component {
     let existingItemIndex = cartItems.findIndex(item => item.id === currentProductData.id);
     if ( existingItemIndex === -1 ) {
       cartItems.push(currentProductData);
+      this.showAlert(true);
     } else {
-      cartItems[existingItemIndex].amount++;
+      if (currentProductData.amount > 0) {
+        cartItems[existingItemIndex].amount++;
+      } else if (currentProductData.amount < 0 && cartItems[existingItemIndex].amount > 1) {
+        cartItems[existingItemIndex].amount--;
+      }
     }
     
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
     this.setState({
       cartItems
     }, () => this.cartUpdate());
+  }
+
+  showAlert = (status) => {
+    this.setState({
+      showAlertStatus: status
+    });
   }
 
   cartUpdate() {
@@ -164,6 +176,7 @@ class App extends React.Component {
           cartData={this.state}
           currency={this.state.currency}
           setCurrency={this.setCurrency}
+          addToCart={this.addToCart}
           removeCartItem={this.removeCartItem}
         />
 
@@ -178,13 +191,27 @@ class App extends React.Component {
             <MyOrdersPage />
           </Route>
           <Route path="/checkout">
-            <CheckoutPage cartData={this.state} clearCart={this.clearCart} user={this.state.user} currency={this.state.currency} />
+            <CheckoutPage
+              cartData={this.state}
+              clearCart={this.clearCart}
+              user={this.state.user}
+              currency={this.state.currency} />
           </Route>
           <Route path="/cart">
-            <CartPage cartData={this.state} removeCartItem={this.removeCartItem} currency={this.state.currency} />
+            <CartPage
+              cartData={this.state}
+              addToCart={this.addToCart}
+              removeCartItem={this.removeCartItem}
+              currency={this.state.currency}
+            />
           </Route>
           <Route path="/">
-            <HomePage addToCart={this.addToCart} currency={this.state.currency} />
+            <HomePage
+              addToCart={this.addToCart}
+              currency={this.state.currency}
+              showAlertStatus={this.state.showAlertStatus}
+              showAlert={this.showAlert}
+            />
           </Route>          
         </Switch>
       </>

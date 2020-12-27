@@ -158,12 +158,11 @@ class RegistrationPage extends React.Component {
             </Paper>
 
             <ButtonGroup variant="contained" color="secondary">
-              <Button>
-                <Link to="/login" style={{ color: '#fff' }}>
-                  <NavigateBeforeIcon fontSize="small" />
-                  Login
-                </Link>
+              <Button component={Link} to="/login" style={{ color: '#fff' }}>
+                <NavigateBeforeIcon fontSize="small" />
+                Login
               </Button>
+
               <Button type="submit">            
                 Registration
                 <NavigateNextIcon fontSize="small" />

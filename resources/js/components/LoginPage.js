@@ -115,10 +115,9 @@ class LoginPage extends React.Component {
               <Button type="submit">
                 Login
               </Button>
-              <Button>
-                <Link to="/registration" style={{ color: '#fff' }}>
+
+              <Button component={Link} to="/registration" style={{ color: '#fff' }}>
                 Registration
-                </Link>
               </Button>
             </ButtonGroup>
           </form>

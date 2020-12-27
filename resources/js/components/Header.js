@@ -105,6 +105,7 @@ class Header extends React.Component {
 
               <CartNav
                 cartData={this.props.cartData}
+                addToCart={this.props.addToCart}
                 removeCartItem={this.props.removeCartItem}
                 currency={this.props.currency}
               />
