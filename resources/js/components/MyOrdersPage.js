@@ -38,8 +38,6 @@ class MyOrdersPage extends React.Component {
       orderItems = this.state.orders.map( (orderItem) => <MyOrdersItem key={orderItem.id} data={orderItem} /> );
     }
 
-    console.log(this.state.orders);
-
     return(
       <Container style={{ marginTop: 30 }}>
         <h1>My Orders</h1>
