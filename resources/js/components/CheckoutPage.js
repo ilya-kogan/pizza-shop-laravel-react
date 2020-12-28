@@ -131,7 +131,7 @@ class CheckoutPage extends React.Component {
             <form method="POST" onSubmit={(e) => this.handleSubmit(e)}>
               <Paper elevation={3} style={{ marginBottom: 15, padding: 40 }}>          
                 <Grid container spacing={3} justify="space-between" alignItems="center" style={{ marginBottom: 20 }}>
-                  <Grid item xs>
+                  <Grid item xs={12} sm>
                     <TextField
                       error={this.state.errors.firstName ? true : false}
                       label="First Name"
@@ -146,7 +146,7 @@ class CheckoutPage extends React.Component {
                     />
                   </Grid>
 
-                  <Grid item xs>
+                  <Grid item xs={12} sm>
                     <TextField
                       error={this.state.errors.lastName ? true : false}
                       label="Last Name"
@@ -161,7 +161,7 @@ class CheckoutPage extends React.Component {
                     />
                   </Grid>
 
-                  <Grid item xs>
+                  <Grid item xs={12} sm>
                     <TextField
                       error={this.state.errors.email ? true : false}
                       label="Email"
@@ -178,7 +178,7 @@ class CheckoutPage extends React.Component {
                 </Grid>
 
                 <Grid container spacing={3} justify="space-between" alignItems="center" style={{ marginBottom: 20 }}>
-                  <Grid item xs>
+                  <Grid item xs={12} sm>
                     <TextField
                       error={this.state.errors.phone ? true : false}
                       label="Phone"
@@ -193,7 +193,7 @@ class CheckoutPage extends React.Component {
                     />
                   </Grid>
 
-                  <Grid item xs>
+                  <Grid item xs={12} sm>
                     <TextField
                       error={this.state.errors.address ? true : false}
                       label="Address"
@@ -208,7 +208,7 @@ class CheckoutPage extends React.Component {
                     />
                   </Grid>
 
-                  <Grid item xs>
+                  <Grid item xs={12} sm>
                     <TextField
                       error={this.state.errors.floor ? true : false}
                       label="Floor"
@@ -225,7 +225,7 @@ class CheckoutPage extends React.Component {
                 </Grid>
 
                 <Grid container justify="space-between" alignItems="center">
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={12}>
                     <TextField
                       id="standard-full-width"
                       label="Order Comments"
@@ -250,7 +250,7 @@ class CheckoutPage extends React.Component {
 
                     { this.state.createAccount && 
                       <Grid container spacing={3}>
-                        <Grid item xs={4}>
+                        <Grid item xs={12} sm={4}>
                           <TextField
                             error={this.state.errors.password ? true : false}
                             label="Password"
@@ -266,7 +266,7 @@ class CheckoutPage extends React.Component {
                           />
                         </Grid>
 
-                        <Grid item xs={4}>
+                        <Grid item xs={12} sm={4}>
                           <TextField
                             error={this.state.errors.password_confirm ? true : false}
                             label="Password Confirm"

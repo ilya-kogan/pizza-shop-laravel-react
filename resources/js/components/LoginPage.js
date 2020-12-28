@@ -72,7 +72,7 @@ class LoginPage extends React.Component {
           <form method="POST" onSubmit={ (e) => this.handleSubmit(e) }>
             <Paper elevation={3} style={{ marginBottom: 15, padding: '50px 30px 1px' }}>
               <Grid container spacing={3} alignItems="center" style={{ marginBottom: 20 }}>
-                <Grid item xs={3}>
+                <Grid item xs={12} sm={3}>
                   <TextField
                     error={this.state.errors.email ? true : false}
                     label="Email"
@@ -87,7 +87,7 @@ class LoginPage extends React.Component {
                   />
                 </Grid>
 
-                <Grid item xs={3}>
+                <Grid item xs={12} sm={3}>
                   <TextField
                     error={this.state.errors.password ? true : false}                    
                     label="Password"

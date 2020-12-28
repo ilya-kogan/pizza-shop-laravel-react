@@ -71,7 +71,7 @@ class RegistrationPage extends React.Component {
           <form method="POST" onSubmit={ (e) => this.handleSubmit(e) }>
             <Paper elevation={3} style={{ marginBottom: 15, padding: '50px 30px 1px' }}>
               <Grid container spacing={3} justify="space-between" alignItems="center" style={{ marginBottom: 20 }}>
-                <Grid item xs>
+                <Grid item xs={12} sm>
                   <TextField
                     error={this.state.errors.first_name ? true : false}
                     label="First Name"
@@ -85,7 +85,7 @@ class RegistrationPage extends React.Component {
                   />
                 </Grid>
 
-                <Grid item xs>
+                <Grid item xs={12} sm>
                   <TextField
                     error={this.state.errors.last_name ? true : false}
                     label="Last Name"
@@ -99,7 +99,7 @@ class RegistrationPage extends React.Component {
                   />
                 </Grid>
 
-                <Grid item xs>
+                <Grid item xs={12} sm>
                   <TextField
                     error={this.state.errors.email ? true : false}
                     label="Email"
@@ -116,8 +116,8 @@ class RegistrationPage extends React.Component {
                 </Grid>
               </Grid>
                 
-              <Grid container spacing={3} justify="space-between" alignItems="center" style={{ marginBottom: 20 }}>
-                <Grid item xs>
+              <Grid container spacing={3} alignItems="center" style={{ marginBottom: 20 }}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     error={this.state.errors.password ? true : false}
                     label="Password"
@@ -133,7 +133,7 @@ class RegistrationPage extends React.Component {
                   />
                 </Grid>
 
-                <Grid item xs>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     error={this.state.errors.password_confirm ? true : false}
                     label="Password Confirm"

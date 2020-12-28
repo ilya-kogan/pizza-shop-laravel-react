@@ -20,13 +20,13 @@ class CartItem extends React.Component {
         alignItems="center"
         spacing={3}
       >
-        <Grid item xs={3}>
+        <Grid item xs={6} sm={3}>
           <img style={{ width: 100 }} src={ 'img/' + id + '.png' } alt={ info.title } />
           
           <strong style={{ padding: "0 20px", fontSize: "1rem" }}>{ info.title }</strong>
         </Grid>
 
-        <Grid item xs={3} container justify="center">
+        <Grid item xs={6} sm={3} container justify="center">
           <Fab size="small" color="secondary" aria-label="add">
             <RemoveIcon onClick={() => this.props.addToCart({ id: id, info: info, amount: -1 })}/>
           </Fab>
@@ -42,7 +42,7 @@ class CartItem extends React.Component {
           </Fab>
         </Grid>
 
-        <Grid item xs={3} container justify="center">
+        <Grid item xs={6} sm={3} container justify="center">
           <Typography>
             <b>
               {curr_symbol}{ curr_name == 'usd' ? info.price : info.price_eur } * { amount }pc. = {curr_symbol}{ (curr_name == 'usd' ? info.price : info.price_eur) * amount }
@@ -50,7 +50,7 @@ class CartItem extends React.Component {
           </Typography>
         </Grid>
 
-        <Grid item xs={3} container justify="flex-end">
+        <Grid item xs={6} sm={3} container justify="flex-end">
           <Button variant="contained" color="secondary" onClick={() => this.props.removeCartItem(id)} >
             Remove from cart
           </Button>
