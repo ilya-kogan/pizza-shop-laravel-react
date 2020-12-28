@@ -33,18 +33,20 @@ class MyOrdersPage extends React.Component {
   }
 
   render() {   
-    let orderItems;
+    let orderItems = [];
     if ( this.state.orders && this.state.orders.length > 0 ) {
       orderItems = this.state.orders.map( (orderItem) => <MyOrdersItem key={orderItem.id} data={orderItem} /> );
     }
+
+    console.log(this.state.orders);
 
     return(
       <Container style={{ marginTop: 30 }}>
         <h1>My Orders</h1>
 
         <Paper elevation={3} style={{ marginBottom: 15, padding: 30 }}>
-          { (this.props.user && orderItems) &&
-            { orderItems }
+          { (this.props.user && (this.state.orders && this.state.orders.length > 0)) &&
+            orderItems
           }
 
           { !this.props.user &&
@@ -53,7 +55,7 @@ class MyOrdersPage extends React.Component {
             </>
           }
 
-          { (this.props.user && !orderItems) &&
+          { (this.props.user && !this.state.orders) &&
             <>
               Sorry, you don't have any orders yet.
             </>
